@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <script defer src="js/myScript.js"></script>
+  </head>
+  <body>
+    <div class="score">
+      <div class="choice">
+        <p>ROCK</p>
+        <p>PAPER</p>
+        <p>SCISSORS</p>
+      </div>
+      <div class="point">
+        <h4>SCORE</h4>
+        <p id="score">0</p>
+      </div>
+    </div>
+    <div class="center" id="center">
+      <div class="line">
+        <button class="button paper" id="choice-paper" type="button">
+          <img src="images/icon-paper.svg" alt="" />
+        </button>
+        <button class="button scissors" id="choice-scissors" type="button">
+          <img src="images/icon-scissors.svg" alt="" />
+        </button>
+      </div>
+      <div class="linetwo">
+        <button class="button rock" id="choice-rock" type="button">
+          <img src="images/icon-rock.svg" alt="" />
+        </button>
+      </div>
+    </div>
+    <div class="vs" id="vs">
+      <!-- just vs -->
+      <div class="fight" id="fight">
+        <div class="player">
+          <p>YOU PICKED</p>
+          <div class="disable" id="pickedScissors">
+            <div class="border yellow" id="winnerpickedScissors">
+              <div class="choice-fight">
+                <img src="images/icon-scissors.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="disable" id="pickedRock">
+            <div class="border red" id="winnerpickedRock">
+              <div class="choice-fight">
+                <img src="images/icon-rock.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="disable" id="pickedPaper">
+            <div class="border blue" id="winnerpickedPaper">
+              <div class="choice-fight">
+                <img src="images/icon-paper.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result" id="result">
+          <p id="winLose"></p>
+          <button type="button" id="replay">PLAY AGAIN</button>
+        </div>
+        <div class="computer" id="computer">
+          <p>THE HOUSE PICKED</p>
+          <div class="waiting" id="waiting"></div>
+          <div class="disable" id="computerScissors">
+            <div class="border yellow" id="losepickedPaper">
+              <div class="choice-fight">
+                <img src="images/icon-scissors.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="disable" id="computerRock">
+            <div class="border red" id="losepickedScissors">
+              <div class="choice-fight">
+                <img src="images/icon-rock.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="disable" id="computerPaper">
+            <div class="border blue" id="losepickedRock">
+              <div class="choice-fight">
+                <img src="images/icon-paper.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>RULES</h1>
+          <button type="button" id="close-modal-button">
+            <img src="images/icon-close.svg" alt="" />
+          </button>
+        </div>
+        <div class="modal-img">
+          <img src="images/image-rules.svg" alt="" />
+        </div>
+      </div>
+    </div>
+    <div id="overlay"></div>
+    <div class="rules">
+      <button type="button" id="open-modal-button">RULES</button>
+    </div>
+  </body>
+</html>
