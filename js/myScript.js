@@ -5,16 +5,31 @@ const replay = document.getElementById("replay");
 const playerChoicePaper = document.getElementById("choice-paper");
 const playerChoiceRock = document.getElementById("choice-rock");
 const playerChoiceScissors = document.getElementById("choice-scissors");
+const computerId = document.getElementById("computerChoice");
+const computerPick = document.getElementById("computerPicked");
+const choiceImg = document.getElementById("choiceImg");
+const center = document.getElementById("center");
+const winLose = document.getElementById("winLose");
+const vs = document.getElementById("vs");
+const waiting = document.getElementById("waiting");
+const count = document.getElementById("score");
+const computer = document.getElementById("computer");
+const modal = document.getElementById("modal");
+const fight = document.getElementById("fight");
+const result = document.getElementById("result");
+const playerChoiceId = document.getElementById("playerChoice");
+const playerPicked = document.getElementById("playerPicked");
 let computerChoice = "default";
 let playerChoice = "default";
 let score = 0;
+let win = document.getElementById("");
+let playerChoiceImg = "src";
 
 const randomNumber = (maxNumber = 2) => {
   return Math.round(Math.random() * maxNumber);
 };
 
 openModalButton.addEventListener("click", () => {
-  const modal = document.getElementById("modal");
   openModal(modal);
 });
 
@@ -24,36 +39,38 @@ overlay.addEventListener("click", () => {
 });
 
 closeModalButton.addEventListener("click", () => {
-  const modal = document.getElementById("modal");
   closeModal(modal);
 });
 
 playerChoicePaper.addEventListener("click", () => {
-  playerChoice = "pickedPaper";
+  playerChoice = "blue";
+  playerChoiceImg = "images/icon-paper.svg";
   let rand = randomNumber();
   display(playerChoice);
-  computerRandom(rand, computerChoice);
+  computerRandom(rand);
   winner(playerChoice, rand, score);
 });
 
 playerChoiceRock.addEventListener("click", () => {
-  playerChoice = "pickedRock";
+  playerChoice = "red";
+  playerChoiceImg = "images/icon-rock.svg";
   let rand = randomNumber();
   display(playerChoice);
-  computerRandom(rand, computerChoice);
+  computerRandom(rand);
   winner(playerChoice, rand, score);
 });
 
 playerChoiceScissors.addEventListener("click", () => {
-  playerChoice = "pickedScissors";
+  playerChoice = "yellow";
+  playerChoiceImg = "images/icon-scissors.svg";
   let rand = randomNumber();
   display(playerChoice);
-  computerRandom(rand, computerChoice);
+  computerRandom(rand);
   winner(playerChoice, rand, score);
 });
 
 replay.addEventListener("click", () => {
-  reset(playerChoice, computerChoice);
+  reset();
 });
 
 function openModal(modal) {
@@ -68,27 +85,36 @@ function closeModal(modal) {
 }
 
 function display(playerChoice) {
-  document.getElementById("center").classList.add("disable");
-  document.getElementById("vs").classList.add("enable");
-  document.getElementById(playerChoice).classList.remove("disable");
+  center.classList.add("disable");
+  vs.classList.add("enable");
+  playerChoiceId.classList.remove("disable");
+  playerPicked.classList.add(playerChoice);
+  document.getElementById("playerChoiceImg").src = playerChoiceImg;
 }
 
-function computerRandom(rand, computerChoice) {
+function computerRandom(rand) {
   setTimeout(function () {
-    document.getElementById("waiting").classList.add("disable");
+    waiting.classList.add("disable");
+    console.log(rand);
     switch (rand) {
       case 0:
-        document.getElementById("computerRock").classList.remove("disable");
-        //computerChoice = "computerRock";
+        computerId.classList.remove("disable");
+        computerPick.classList.add("red");
+        choiceImg.src = "images/icon-rock.svg";
+        computerChoice = "red";
         break;
 
       case 1:
-        document.getElementById("computerPaper").classList.remove("disable");
-        //computerChoice = "computerPaper";
+        computerId.classList.remove("disable");
+        computerPick.classList.add("blue");
+        choiceImg.src = "images/icon-paper.svg";
+        computerChoice = "blue";
         break;
       case 2:
-        document.getElementById("computerScissors").classList.remove("disable");
-        //computerChoice = "computerScissors";
+        computerId.classList.remove("disable");
+        computerPick.classList.add("yellow");
+        choiceImg.src = "images/icon-scissors.svg";
+        computerChoice = "yellow";
         break;
     }
   }, 700);
@@ -96,61 +122,59 @@ function computerRandom(rand, computerChoice) {
 function winner(playerChoice, rand, score) {
   setTimeout(() => {
     if (
-      (playerChoice == "pickedRock" && rand == 2) ||
-      (playerChoice == "pickedPaper" && rand == 0) ||
-      (playerChoice == "pickedScissors" && rand == 1)
+      (playerChoice == "red" && rand == 2) ||
+      (playerChoice == "blue" && rand == 0) ||
+      (playerChoice == "yellow" && rand == 1)
     ) {
-      const parap = document.getElementById("winLose");
+      const parap = winLose;
       parap.innerHTML = "YOU WIN";
-      document.getElementById("winner" + playerChoice).classList.add("winner");
-      document.getElementById("fight").style.gridTemplateColumns =
-        "33% 33% 33%";
-      document.getElementById("result").style.display = "flex";
-      document.getElementById("computer").style.gridColumnStart = "3";
+      win = playerPicked;
+      win.classList.add("winner");
+      fight.style.gridTemplateColumns = "33% 33% 33%";
+      result.style.display = "flex";
+      computer.style.gridColumnStart = "3";
       Score(1);
     } else if (
-      (playerChoice == "pickedRock" && rand == 1) ||
-      (playerChoice == "pickedPaper" && rand == 2) ||
-      (playerChoice == "pickedScissors" && rand == 0)
+      (playerChoice == "red" && rand == 1) ||
+      (playerChoice == "blue" && rand == 2) ||
+      (playerChoice == "yellow" && rand == 0)
     ) {
-      const parap = document.getElementById("winLose");
+      const parap = winLose;
       parap.innerHTML = "YOU LOSE";
-      document.getElementById("lose" + playerChoice).classList.add("winner");
-      document.getElementById("fight").style.gridTemplateColumns =
-        "33% 33% 33%";
+      win = computerPick;
+      win.classList.add("winner");
+      fight.style.gridTemplateColumns = "33% 33% 33%";
 
-      document.getElementById("result").style.display = "flex";
-      document.getElementById("computer").style.gridColumnStart = "3";
+      result.style.display = "flex";
+      computer.style.gridColumnStart = "3";
       Score(-1);
     } else {
-      const parap = document.getElementById("winLose");
+      const parap = winLose;
       parap.innerHTML = "DRAW";
-      document.getElementById("fight").style.gridTemplateColumns =
-        "33% 33% 33%";
+      fight.style.gridTemplateColumns = "33% 33% 33%";
 
-      document.getElementById("result").style.display = "flex";
-      document.getElementById("computer").style.gridColumnStart = "3";
-      document.getElementById("score").innerHTML = score;
+      result.style.display = "flex";
+      computer.style.gridColumnStart = "3";
+      count.innerHTML = score;
     }
   }, 700);
 }
 
 function Score(value) {
   score += value;
-  document.getElementById("score").innerHTML = score;
+  count.innerHTML = score;
 }
 
-function reset(playerChoice, computerChoice) {
+function reset() {
   console.log(computerChoice);
-  document.getElementById("winLose").innerHTML = "";
-  document.getElementById(playerChoice).classList.add("disable");
-  //document.getElementById(computerChoice).classList.add("disable");
-  document.getElementById("computerScissors").classList.add("disable");
-  document.getElementById("computerRock").classList.add("disable");
-  document.getElementById("computerPaper").classList.add("disable");
-  document.getElementById("vs").classList.remove("enable");
-  document.getElementById("center").classList.remove("disable");
-  document.getElementById("waiting").classList.remove("disable");
-  document.getElementById("winner" + playerChoice).classList.remove("winner");
-  document.getElementById("lose" + playerChoice).classList.remove("winner");
+  console.log(score);
+  winLose.innerHTML = "";
+  playerChoiceId.classList.add("disable");
+  computerId.classList.add("disable");
+  computerPick.classList.remove(computerChoice);
+  playerPicked.classList.remove(playerChoice);
+  vs.classList.remove("enable");
+  center.classList.remove("disable");
+  waiting.classList.remove("disable");
+  win.classList.remove("winner");
 }
