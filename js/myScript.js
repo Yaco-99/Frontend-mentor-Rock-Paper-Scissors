@@ -43,7 +43,7 @@ closeModalButton.addEventListener("click", () => {
 });
 
 playerChoicePaper.addEventListener("click", () => {
-  playerChoice = "blue";
+  playerChoice = "paper";
   playerChoiceImg = "images/icon-paper.svg";
   let rand = randomNumber();
   display(playerChoice);
@@ -52,7 +52,7 @@ playerChoicePaper.addEventListener("click", () => {
 });
 
 playerChoiceRock.addEventListener("click", () => {
-  playerChoice = "red";
+  playerChoice = "rock";
   playerChoiceImg = "images/icon-rock.svg";
   let rand = randomNumber();
   display(playerChoice);
@@ -61,7 +61,7 @@ playerChoiceRock.addEventListener("click", () => {
 });
 
 playerChoiceScissors.addEventListener("click", () => {
-  playerChoice = "yellow";
+  playerChoice = "scissors";
   playerChoiceImg = "images/icon-scissors.svg";
   let rand = randomNumber();
   display(playerChoice);
@@ -95,26 +95,25 @@ function display(playerChoice) {
 function computerRandom(rand) {
   setTimeout(function () {
     waiting.classList.add("disable");
-    console.log(rand);
     switch (rand) {
       case 0:
         computerId.classList.remove("disable");
-        computerPick.classList.add("red");
+        computerPick.classList.add("rock");
         choiceImg.src = "images/icon-rock.svg";
-        computerChoice = "red";
+        computerChoice = "rock";
         break;
 
       case 1:
         computerId.classList.remove("disable");
-        computerPick.classList.add("blue");
+        computerPick.classList.add("paper");
         choiceImg.src = "images/icon-paper.svg";
-        computerChoice = "blue";
+        computerChoice = "paper";
         break;
       case 2:
         computerId.classList.remove("disable");
-        computerPick.classList.add("yellow");
+        computerPick.classList.add("scissors");
         choiceImg.src = "images/icon-scissors.svg";
-        computerChoice = "yellow";
+        computerChoice = "scissors";
         break;
     }
   }, 700);
@@ -122,9 +121,9 @@ function computerRandom(rand) {
 function winner(playerChoice, rand, score) {
   setTimeout(() => {
     if (
-      (playerChoice == "red" && rand == 2) ||
-      (playerChoice == "blue" && rand == 0) ||
-      (playerChoice == "yellow" && rand == 1)
+      (playerChoice == "rock" && rand == 2) ||
+      (playerChoice == "paper" && rand == 0) ||
+      (playerChoice == "scissors" && rand == 1)
     ) {
       const parap = winLose;
       parap.innerHTML = "YOU WIN";
@@ -133,11 +132,11 @@ function winner(playerChoice, rand, score) {
       fight.style.gridTemplateColumns = "33% 33% 33%";
       result.style.display = "flex";
       computer.style.gridColumnStart = "3";
-      Score(1);
+      scoreCount(1);
     } else if (
-      (playerChoice == "red" && rand == 1) ||
-      (playerChoice == "blue" && rand == 2) ||
-      (playerChoice == "yellow" && rand == 0)
+      (playerChoice == "rock" && rand == 1) ||
+      (playerChoice == "paper" && rand == 2) ||
+      (playerChoice == "scissors" && rand == 0)
     ) {
       const parap = winLose;
       parap.innerHTML = "YOU LOSE";
@@ -147,7 +146,7 @@ function winner(playerChoice, rand, score) {
 
       result.style.display = "flex";
       computer.style.gridColumnStart = "3";
-      Score(-1);
+      scoreCount(-1);
     } else {
       const parap = winLose;
       parap.innerHTML = "DRAW";
@@ -160,14 +159,12 @@ function winner(playerChoice, rand, score) {
   }, 700);
 }
 
-function Score(value) {
+function scoreCount(value) {
   score += value;
   count.innerHTML = score;
 }
 
 function reset() {
-  console.log(computerChoice);
-  console.log(score);
   winLose.innerHTML = "";
   playerChoiceId.classList.add("disable");
   computerId.classList.add("disable");

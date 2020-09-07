@@ -54,17 +54,17 @@ button {
   background-origin: border-box;
   background-clip: content-box, border-box;
 }
-.paper {
+.paper-btn {
   cursor: pointer;
   background-image: linear-gradient(white, white),
     radial-gradient(circle at top left, hsl(230, 89%, 62%), hsl(230, 89%, 65%));
 }
-.scissors {
+.scissors-btn {
   cursor: pointer;
   background-image: linear-gradient(white, white),
     radial-gradient(circle at top left, hsl(39, 89%, 49%), hsl(40, 84%, 53%));
 }
-.rock {
+.rock-btn {
   cursor: pointer;
   background-image: linear-gradient(white, white),
     radial-gradient(circle at top left, hsl(349, 71%, 52%), hsl(349, 70%, 56%));
@@ -225,21 +225,21 @@ button {
     0px 0px 10px 120px rgba(151, 155, 170, 0.2),
     0px 0px 10px 180px rgba(151, 155, 170, 0.1);
 }
-.yellow {
+.scissors {
   background-image: radial-gradient(
     circle at top left,
     hsl(39, 89%, 49%),
     hsl(40, 84%, 53%)
   );
 }
-.red {
+.rock {
   background-image: radial-gradient(
     circle at top left,
     hsl(349, 71%, 52%),
     hsl(349, 70%, 56%)
   );
 }
-.blue {
+.paper {
   background-image: radial-gradient(
     circle at top left,
     hsl(230, 89%, 62%),
